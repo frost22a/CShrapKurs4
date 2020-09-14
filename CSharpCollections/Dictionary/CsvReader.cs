@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace ArraysPracticalExample_CSV
+namespace Dictionary
 {
     class CsvReader
     {
@@ -15,23 +15,27 @@ namespace ArraysPracticalExample_CSV
             this.csvFilePath = csvFilePath;
         }
 
-        public City[] ReadFirstNCities(int nCities)
+        public Dictionary<string, City> ReadAllCities() 
         {
-            City[] cities = new City[nCities];
+            var cities = new Dictionary<string, City>();
 
             using (StreamReader streamReader = new StreamReader(csvFilePath)) // użycie using powoduje zamknięcie StreamReadera po zakończeniu czytania pliku, 
                                                                               // jeżeli zostałby nadal otwarty , to inne progarmy nie miałyby dostepu do pliku population.csv
             {
                 streamReader.ReadLine();
-
-                for (int i = 0; i < nCities; i++)
+                
+                string csvLine;
+                while ((csvLine = streamReader.ReadLine()) != null)
                 {
-                    string csvLine = streamReader.ReadLine();
-                    cities[i] = ReadCityFromCsvFile(csvLine);
-                }
+                    //cities.Add(ReadCityFromCsvFile(csvLine).CityCode, ReadCityFromCsvFile(csvLine));// < - moja wersja
 
+                    //wersja z wykładów - >
+                    City city = ReadCityFromCsvFile(csvLine);
+                    cities.Add(city.CityCode, city);
+                }
+                
             }
-            return cities;
+                return cities;
         }
 
         public City ReadCityFromCsvFile(string csvLine)
@@ -46,7 +50,7 @@ namespace ArraysPracticalExample_CSV
             int menPopulation = int.Parse(parts[4]);
             int womenPopulation = int.Parse(parts[5]);
 
-            return new City(cityName, cityCode, country, totalPopulation, menPopulation, womenPopulation);
+            return new City(cityName, cityCode, country, totalPopulation, menPopulation, womenPopulation);        
         }
     }
 }
