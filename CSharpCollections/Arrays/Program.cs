@@ -24,8 +24,10 @@ namespace Arrays
                 "December"
             };
 
-            #region array examples
+            #region array examples https://www.tutorialspoint.com/csharp/csharp_arrays.htm - definicja i przykłady
+            // array jest typem referencyjnym - zatem potrzebuje deklaracji orqaz inicjalizacji - patrz strona html powyżej             
             int[] arrayInt = {4, 77 ,24,36 };
+            int[] arrayInt2 = new int[7]; // ważne - > bardzo ważny sposób tworzenia tablic!!!! - > wykorzystywany w klasach new CLASSNAME[XXX]
             char[] arrayChar = { 'g', 'l', 'a', 's' };
             System.Drawing.Rectangle[] arrayRectangle =
                 {
@@ -33,6 +35,7 @@ namespace Arrays
                     new System.Drawing.Rectangle(20,30,440,60),
                     new System.Drawing.Rectangle(10,40,150,250)
                 };
+            
             #endregion
 
             #region foreach in arrays
