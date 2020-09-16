@@ -79,12 +79,12 @@ namespace LINQ
 
             //Składnia w LINQ:
 
-            var filtredCities = cities.Where(c => !c.CityName.Contains("Test")).Take(10);
+            var filtredCities = cities.Where(c => c.CityName.Contains("Test") | c.CityName.Contains("Sla"));
 
             // teraz zapiszemy to samo zapytanie, ale używając składni linq:
 
             var filtredCities2 = (from city in cities
-                                  where !city.CityName.Contains("Test")
+                                  where (city.CityName.Contains("Test") | city.CityName.Contains("Sla"))
                                   select city).Take(10);                            
 
 
@@ -99,8 +99,16 @@ namespace LINQ
             {
                 Console.WriteLine($"{city.TotalPopulation:### ### ###} : {city.CityCode} : {city.CityName}");
             }
-            City city2;
-            
+
+            if (cities.Any(c => c.CityName=="Mazowieckie" & c.CityCode=="MAZ" & c.Country=="Polska" & c.TotalPopulation==5411446 & c.MenPopulation==2589469 & c.WomenPopulation==2821977))
+            {
+                Console.WriteLine("na liście jest takie miasto");
+            }
+
+            if (cities.Any(c => c.CityName == "Mazowieckie"))
+            {
+                Console.WriteLine("jest takie miasto");
+            }
 
         }
     }
