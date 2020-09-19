@@ -19,6 +19,8 @@ namespace CollectionsOfCollections
             cities = csvReader.ReadAllCities();
 
             //var city = cities["Polska"].ElementAt(0);
+            //lub - > LEPSZY SPOSÓB:
+            //var city = cities["Polska"][0];
             //Console.WriteLine(cities["Polska"].ElementAt(2).CityName);
             //Console.WriteLine(city.CityName);
 
